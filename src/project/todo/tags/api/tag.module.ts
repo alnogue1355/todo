@@ -1,7 +1,7 @@
 import { Module, Scope } from '@nestjs/common';
 
-import { TODO_CRUD_REPOSITORY } from '../domain/repositories/todo.repository';
-import { ToDoController } from './controllers/todo.controller';
+import { TAG_CRUD_REPOSITORY } from '../domain/repositories/tag.repository';
+import { TagController } from './controllers/tag.controller';
 import { CrudRepository } from '../infrastructure/repositories/typeorm/mariadb/tag-crud.repository.impl';
 import { AppCreateHandler } from '../application/commands/appCreate.handler';
 import { AppUpdateHandler } from '../application/commands/appUpdate.handler';
@@ -14,14 +14,14 @@ import { DeleteHandler } from '../domain/commands/delete.handler';
 import { GetAllHandler } from '../domain/queries/getAll.handler';
 import { GetByIdHandler } from '../domain/queries/getById.handler';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ToDoDb } from '../infrastructure/repositories/typeorm/mariadb/entities/todo.entity';
+import { TagDb } from '../infrastructure/repositories/typeorm/mariadb/entities/tag.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ToDoDb])],
-  controllers: [ToDoController],
+  imports: [TypeOrmModule.forFeature([TagDb])],
+  controllers: [TagController],
   providers: [
     {
-      provide: TODO_CRUD_REPOSITORY,
+      provide: TAG_CRUD_REPOSITORY,
       useClass: CrudRepository,
       scope: Scope.REQUEST,
     },
@@ -40,4 +40,4 @@ import { ToDoDb } from '../infrastructure/repositories/typeorm/mariadb/entities/
   ],
   exports: [],
 })
-export class ToDoModule {}
+export class TagModule {}

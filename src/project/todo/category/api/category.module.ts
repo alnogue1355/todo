@@ -1,8 +1,8 @@
 import { Module, Scope } from '@nestjs/common';
 
-import { TODO_CRUD_REPOSITORY } from '../domain/repositories/todo.repository';
-import { ToDoController } from './controllers/todo.controller';
-import { CrudRepository } from '../infrastructure/repositories/typeorm/mariadb/tag-crud.repository.impl';
+import { CATEGORY_CRUD_REPOSITORY } from '../domain/repositories/category.repository';
+import { CategoryController } from './controllers/category.controller';
+import { CrudRepository } from '../infrastructure/repositories/typeorm/mariadb/category-crud.repository.impl';
 import { AppCreateHandler } from '../application/commands/appCreate.handler';
 import { AppUpdateHandler } from '../application/commands/appUpdate.handler';
 import { AppDeleteHandler } from '../application/commands/appDelete.handler';
@@ -14,14 +14,14 @@ import { DeleteHandler } from '../domain/commands/delete.handler';
 import { GetAllHandler } from '../domain/queries/getAll.handler';
 import { GetByIdHandler } from '../domain/queries/getById.handler';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ToDoDb } from '../infrastructure/repositories/typeorm/mariadb/entities/todo.entity';
+import { CategoryDb } from '../infrastructure/repositories/typeorm/mariadb/entities/category.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ToDoDb])],
-  controllers: [ToDoController],
+  imports: [TypeOrmModule.forFeature([CategoryDb])],
+  controllers: [CategoryController],
   providers: [
     {
-      provide: TODO_CRUD_REPOSITORY,
+      provide: CATEGORY_CRUD_REPOSITORY,
       useClass: CrudRepository,
       scope: Scope.REQUEST,
     },
@@ -40,4 +40,4 @@ import { ToDoDb } from '../infrastructure/repositories/typeorm/mariadb/entities/
   ],
   exports: [],
 })
-export class ToDoModule {}
+export class CategoryModule {}
